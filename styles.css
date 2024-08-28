@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #87CEEB; /* Light blue background */
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.goldfish-container {
+    position: absolute;
+    top: 40%;
+    left: -20%;
+    display: flex;
+    align-items: center;
+    animation: swim 10s linear infinite;
+}
+
+.goldfish {
+    width: 364px;
+    z-index: 2; /* Ensure the goldfish is on top */
+}
+
+.wave-text {
+    font-size: 48px;
+    margin-right: 20px;
+    position: relative;
+    animation: wave 2s infinite ease-in-out;
+    white-space: nowrap;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(90deg, #00c6ff, #0072ff); /* Vibrant blue gradient */
+    font-family: 'Pacifico', cursive;
+    animation-delay: calc(var(--i) * 0.5s);
+    z-index: 1;
+}
+
+.goldfish-container .wave-text:nth-child(1) { --i: 0; }
+.goldfish-container .wave-text:nth-child(2) { --i: 1; }
+.goldfish-container .wave-text:nth-child(3) { --i: 2; }
+.goldfish-container .wave-text:nth-child(4) { --i: 3; }
+
+.birthday-text {
+    position: absolute;
+    top: 10%;
+    font-size: 56px; /* Bigger font size */
+    color: #FFD700; /* Gold color */
+    text-shadow: 3px 3px 8px #000;
+    font-family: 'Quicksand', sans-serif; /* Stylish and modern font */
+}
+
+/* Confetti animation */
+.confetti {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+}
+
+.confetti::before, .confetti::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #FF69B4; /* Pink confetti */
+    top: -10px;
+    left: 50%;
+    animation: confetti-fall 5s linear infinite;
+}
+
+.confetti::after {
+    left: 60%;
+    animation-duration: 7s;
+    background-color: #FFD700; /* Gold confetti */
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateX(0) translateY(0) rotate(0);
+    }
+    100% {
+        transform: translateX(calc(-50vw + 100px)) translateY(100vh) rotate(360deg);
+    }
+}
+
+@keyframes swim {
+    from {
+        left: -20%;
+    }
+    to {
+        left: 120%;
+    }
+}
+
+@keyframes wave {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.bubble {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    animation: rise 12s linear infinite, side-to-side 6s ease-in-out infinite;
+}
+
+@keyframes rise {
+    0% {
+        bottom: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        bottom: 100%;
+        transform: scale(1.5);
+    }
+}
+
+@keyframes side-to-side {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(30px);
+    }
+}
+
+.bubble:hover {
+    opacity: 0;
+    transform: scale(2);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
